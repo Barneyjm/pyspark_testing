@@ -4,11 +4,10 @@ MAINTAINER James Barney
 RUN mkdir /app
 WORKDIR /app
 
-RUN yum install -y wget python-pip; yum clean all
+RUN yum install -y wget python-pip ; \
+	yum clean all && \
+	pip install pytest
 
-RUN pip install pytest
-
-RUN wget --no-check-certificate -O master.zip https://github.com/Barneyjm/pyspark_testing/archive/master.zip
-RUN unzip master.zip
-
-CMD ["pytest", "/app"]
+CMD wget --no-check-certificate -O master.zip https://github.com/Barneyjm/pyspark_testing/archive/master.zip && \
+	unzip master.zip && \
+	pytest /app
